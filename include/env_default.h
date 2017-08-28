@@ -39,8 +39,8 @@ const char default_environment[] = {
 #ifdef	CONFIG_USE_BOOTARGS
 	"bootargs="	CONFIG_BOOTARGS			"\0"
 #endif
-#ifdef	CONFIG_BOOTCOMMAND
-	"bootcmd="	CONFIG_BOOTCOMMAND		"\0"
+#ifdef	CONFIG_MENDER_BOOTCOMMAND
+	"bootcmd="	CONFIG_MENDER_BOOTCOMMAND	"\0"
 #endif
 #if defined(CONFIG_BOOTDELAY)
 	"bootdelay="	__stringify(CONFIG_BOOTDELAY)	"\0"
