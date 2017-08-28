@@ -34,8 +34,8 @@ const uchar default_environment[] = {
 #ifdef	CONFIG_USE_BOOTARGS
 	"bootargs="	CONFIG_BOOTARGS			"\0"
 #endif
-#ifdef	CONFIG_BOOTCOMMAND
-	"bootcmd="	CONFIG_BOOTCOMMAND		"\0"
+#ifdef	CONFIG_MENDER_BOOTCOMMAND
+	"bootcmd="	CONFIG_MENDER_BOOTCOMMAND	"\0"
 #endif
 #ifdef	CONFIG_RAMBOOTCOMMAND
 	"ramboot="	CONFIG_RAMBOOTCOMMAND		"\0"
