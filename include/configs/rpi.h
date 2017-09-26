@@ -75,6 +75,9 @@
 #define CONFIG_SYS_LOAD_ADDR		0x1000000
 #define CONFIG_PREBOOT			"usb start"
 
+#define CONFIG_BOOTCOUNT_ENV
+#define CONFIG_BOOTCOUNT_LIMIT
+
 /* Shell */
 
 /* ATAGs support for bootm/bootz */
