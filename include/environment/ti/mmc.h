@@ -68,6 +68,21 @@
 	"loadimage=load ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${bootfile}\0" \
 	"loadrd=load ${devtype} ${bootpart} ${rdaddr} ${bootdir}/${rdfile}; setenv rdsize ${filesize}\0" \
 	"loadfdt=echo loading ${fdtdir}/${fdtfile} ...; load ${devtype} ${bootpart} ${fdtaddr} ${fdtdir}/${fdtfile}\0" \
+	"loadoverlay=echo uboot_overlays: loading ${uboot_overlay} ...; " \
+		"load ${devtype} ${bootpart} ${rdaddr} ${uboot_overlay}; " \
+		"fdt addr ${fdtaddr}; fdt resize ${fdt_buffer}; " \
+		"fdt apply ${rdaddr}; fdt resize ${fdt_buffer};\0" \
+	"virtualloadoverlay=if test -e ${devtype} ${bootpart} ${uboot_overlay}; then " \
+				"run loadoverlay;" \
+			"else " \
+				"echo uboot_overlays: unable to find [${devtype} ${bootpart} ${uboot_overlay}]...;" \
+			"fi;\0" \
+	"capeloadoverlay=if test -e ${devtype} ${bootpart} ${uboot_overlay}; then " \
+				"run loadoverlay;" \
+				"setenv cape_uboot bone_capemgr.uboot_capemgr_enabled=1; " \
+			"else " \
+				"echo uboot_overlays: unable to find [${devtype} ${bootpart} ${uboot_overlay}]...;" \
+			"fi;\0" \
 	"failumsboot=echo; echo FAILSAFE: U-Boot UMS (USB Mass Storage) enabled, media now available over the usb slave port ...; " \
 		"ums 0 ${devtype} 1;\0" \
 	"envboot=mmc dev ${mmcdev}; " \
