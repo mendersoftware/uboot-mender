@@ -34,9 +34,11 @@
 /* For sanity checks. */
 #define MENDER_BOOTENV_SIZE 0x20000
 
+/* Beaglebone Black Debian settings */
 #define MENDER_BOOT_KERNEL_TYPE "bootz"
-#define MENDER_KERNEL_NAME "zImage"
-#define MENDER_DTB_NAME "am335x-bonegreen.dtb"
-#define MENDER_UBOOT_PRE_SETUP_COMMANDS ""
-#define MENDER_UBOOT_POST_SETUP_COMMANDS ""
+#define MENDER_KERNEL_NAME "dummy"
+#define MENDER_DTB_NAME "dummy"
+#define MENDER_UBOOT_PRE_SETUP_COMMANDS "run findfdt; run init_console;"
+#define MENDER_UBOOT_POST_SETUP_COMMANDS "if load ${mender_uboot_root} ${loadaddr} /boot/${bootenvfile}; then env import -t ${loadaddr} ${filesize}; fi; setenv mender_dtb_name dtbs/${uname_r}/${fdtfile}; setenv mender_kernel_name vmlinuz-${uname_r}; setenv bootargs ${bootargs} console=${console} ${optargs} ${cape_disable} ${cape_enable} ${cape_uboot} rootfstype=${mmcrootfstype} ${uboot_detected_capes} ${cmdline} quiet"
+
 #endif /* !HEADER_CONFIG_MENDER_DEFINES_H */
