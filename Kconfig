@@ -487,3 +487,6 @@ source "fs/Kconfig"
 source "lib/Kconfig"
 
 source "test/Kconfig"
+
+config ROOTFS_EMMC
+	bool "Boot from eMMC rather than SDCard on Beaglebone Black"
