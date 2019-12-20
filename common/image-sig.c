@@ -190,6 +190,11 @@ static int fit_image_setup_verify(struct image_sign_info *info,
 		return 1;
 	}
 
+	if (fdt_totalsize(fit) > CONFIG_FIT_SIGNATURE_MAX_SIZE) {
+		*err_msgp = "Total size too large";
+		return 1;
+	}
+
 	if (fit_image_hash_get_algo(fit, noffset, &algo_name)) {
 		*err_msgp = "Can't get hash algo property";
 		return -1;

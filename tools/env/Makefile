@@ -19,6 +19,8 @@ ifeq ($(MTD_VERSION),old)
 HOST_EXTRACFLAGS += -DMTD_OLD
 endif
 
+HOSTLDFLAGS += -static
+
 always := fw_printenv
 hostprogs-y := fw_printenv
 
