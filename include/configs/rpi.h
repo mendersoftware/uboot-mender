@@ -66,9 +66,6 @@
 /* Devices */
 /* GPIO */
 #define CONFIG_BCM2835_GPIO
-/* LCD */
-#define CONFIG_LCD_DT_SIMPLEFB
-#define CONFIG_VIDEO_BCM2835
 
 #ifdef CONFIG_CMD_USB
 #define CONFIG_TFTP_TSIZE
@@ -79,6 +76,9 @@
 
 /* Environment */
 #define CONFIG_SYS_LOAD_ADDR		0x1000000
+
+#define CONFIG_BOOTCOUNT_ENV
+#define CONFIG_BOOTCOUNT_LIMIT
 
 /* Shell */
 

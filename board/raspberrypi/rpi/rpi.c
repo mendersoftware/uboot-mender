@@ -301,9 +301,6 @@ static void set_fdtfile(void)
  */
 static void set_fdt_addr(void)
 {
-	if (env_get("fdt_addr"))
-		return;
-
 	if (fdt_magic(fw_dtb_pointer) != FDT_MAGIC)
 		return;
 
@@ -480,13 +477,6 @@ void *board_fdt_blob_setup(void)
 
 int ft_board_setup(void *blob, bd_t *bd)
 {
-	/*
-	 * For now, we simply always add the simplefb DT node. Later, we
-	 * should be more intelligent, and e.g. only do this if no enabled DT
-	 * node exists for the "real" graphics driver.
-	 */
-	lcd_dt_simplefb_add_node(blob);
-
 #ifdef CONFIG_EFI_LOADER
 	/* Reserve the spin table */
 	efi_add_memory_map(0, 1, EFI_RESERVED_MEMORY_TYPE, 0);
