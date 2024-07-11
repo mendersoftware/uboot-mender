@@ -24,6 +24,7 @@
 #define MENDER_ENV_SETTINGS
 #else
 
+#include <generated/autoconf.h>
 #include <config_mender_defines.h>
 
 #ifdef MENDER_NO_DEFAULT_ALTBOOTCMD
@@ -144,12 +145,31 @@
     "load ${mender_uboot_root} ${kernel_addr_r} /boot/${mender_kernel_name}; "
 #endif
 
+#if defined(CONFIG_TARGET_RPI) || \
+    defined(CONFIG_TARGET_RPI_2) || \
+    defined(CONFIG_TARGET_RPI_0_W) || \
+    defined(CONFIG_TARGET_RPI_3) || \
+    defined(CONFIG_TARGET_RPI_3_32B) || \
+    defined(CONFIG_TARGET_RPI_4) || \
+    defined(CONFIG_TARGET_RPI_4_32B) || \
+    defined(CONFIG_TARGET_RPI_ARM64)
+# define CONFIG_MENDER_BOOTCOMMAND                                      \
+    "fdt addr ${fdt_addr} && fdt get value bootargs /chosen bootargs; " \
+    "run mender_setup; "                                                \
+    "mmc dev ${mender_uboot_dev}; "                                     \
+    "if load ${mender_uboot_root} ${kernel_addr_r} /boot/vmlinux; then " \
+    "booti ${kernel_addr_r} - ${fdt_addr}; "                            \
+    "fi; "                                                              \
+        "echo \"could not load kernel, trying to recover\"; "           \
+    "run mender_try_to_recover"
+#else
 #define CONFIG_MENDER_BOOTCOMMAND                                       \
     "run mender_setup; "                                                \
     MENDER_BOOTARGS                                                     \
     MENDER_LOAD_KERNEL_AND_FDT                                          \
     "${mender_boot_kernel_type} ${kernel_addr_r} - ${fdt_addr_r}; "     \
     "run mender_try_to_recover"
+#endif
 
 #endif /* !MENDER_AUTO_PROBING */
 
