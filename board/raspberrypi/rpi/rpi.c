@@ -171,6 +171,11 @@ static const struct rpi_model rpi_models_new_scheme[] = {
 		DTB_DIR "bcm2711-rpi-cm4.dtb",
 		true,
 	},
+	[0x15] = {
+		"Compute Module 4S",
+		DTB_DIR "bcm2711-rpi-cm4s.dtb",
+		false,
+	},
 	[0x17] = {
 		"5 Model B",
 		DTB_DIR "bcm2712-rpi-5-b.dtb",
