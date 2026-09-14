@@ -342,6 +342,7 @@ static const struct dm_serial_ops pl01x_serial_ops = {
 #if CONFIG_IS_ENABLED(OF_REAL)
 static const struct udevice_id pl01x_serial_id[] ={
 	{.compatible = "arm,pl011", .data = TYPE_PL011},
+	{.compatible = "arm,pl011-axi", .data = TYPE_PL011},
 	{.compatible = "arm,pl010", .data = TYPE_PL010},
 	{}
 };
